@@ -16,7 +16,7 @@ class Checkout(models.Model):
         'library.checkout.line',
         'checkout_id',
         string='Borrowed Books',)
-    checkout_date = fields.Date(readonly=True)
+    checkout_date = fields.Date(default=lambda s: fields.Date.today(),readonly=True)
     close_date = fields.Date(readonly=True)
     member_image = fields.Binary(related='member_id.partner_id.image')
     num_books = fields.Integer(compute='_compute_num_books',store=True)

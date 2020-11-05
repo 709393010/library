@@ -1,10 +1,12 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import Warning
+from odoo.exceptions import ValidationError
+
 class Book(models.Model):
     _name = 'library.book'
     _description = 'Book'
-    _oder= 'name, date_published desc'
+    _order= 'name, date_published asc'
     name = fields.Char('Title', required=True)
     isbn = fields.Char('ISBN')
     ###
@@ -26,10 +28,18 @@ class Book(models.Model):
         default=lambda self: fields.Datetime.now())
     ###
     active = fields.Boolean('Active?', default=True)
-    date_published = fields.Date()
+    date_published = fields.Date('Publiced Date')
     image = fields.Binary('Cover')
     publisher_id = fields.Many2one('res.partner', string='Publisher')
     author_ids = fields.Many2many('res.partner', string='Authors')
+    category_id = fields.Many2one('library.book.category')
+
+    #添加一个python约束，来防⽌使⽤未来的⽇期作为发⾏⽇期。
+    @api.constrains('date_published')
+    def _check_date_published(self):
+        for record in self:
+            if record.date_published and record.date_published > fields.Date.today():
+                raise models.ValidationError('Release date must be in the past')
 
     @api.multi
     def _check_isbn(self):

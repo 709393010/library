@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_library_rule,library_book_users,model_library_book,base.group_user,1,1,1,1
 access_library_book_report,access_library_book_report,model_library_book_report,library_group_user,1,0,0,0
+checkout_category_user,Book Category User,model_library_book_category,library_group_user,1,0,0,0
+checkout_category_manager,Book Category Manager,model_library_book_category,library_group_manager,1,1,1,1

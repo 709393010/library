@@ -20,6 +20,25 @@
         <field name="sequence">95</field>
         <field name="state">cancel</field>
     </record>
-
-
+    <!-- checout satage view -->
+    <record id="stage_view_form" model="ir.ui.view">
+        <field name="name">Checkout State</field>
+        <field name="model">library.checkout.stage</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button string="Make Open" name="make_open" type="object" class="oe_highlight"/>
+                    <button string="Make Done" name="make_done" type="object" class="oe_highlight"/>
+                    <button string="Make Cancel" name="make_cancel" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="state" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 </odoo>

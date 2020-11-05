@@ -16,6 +16,7 @@
                             <field name="author_ids" widget="many2many_tags" />
                             <field name="publisher_id" />
                             <field name="date_published" />
+                            <field name="category_id" />
                         </group>
                         <group name="group_right">
                              <field name="isbn" />
@@ -32,7 +33,7 @@
         <field name="Bookname">Book List</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order="date_published asc">
                 <field name="name" />
                 <field name="author_ids" widget="many2many_tags" />
                 <field name="publisher_id" />
@@ -46,10 +47,36 @@
         <field name="model">library.book</field>
         <field name="arch" type="xml">
              <search>
-                <field name="publisher_id" />
+                <field name="name" />
                 <filter name="filter_active" string="Active" domain="[('active','=',True)]" />
                 <filter name="filter_inactive" string="Inactive" domain="[('active','=',False)]" />
             </search>
         </field>
     </record>
+    <!-- 图书等级视图 -->
+    <record id="view_tree_categ" model="ir.ui.view">
+        <field name="Bookname">Book Categ</field>
+        <field name="model">library.book.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="parent_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="book_categ_view_form" model="ir.ui.view">
+        <field name="name">Book Categ Form View</field>
+        <field name="model">library.book.category</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="parent_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
 </odoo>

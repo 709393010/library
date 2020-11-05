@@ -36,5 +36,11 @@
         parent="menu_library"
         action="myself_action_library_book_sql_report"
     />
-  
+    
+    <!-- library book categ act_window -->
+    <act_window id="library_book_categ_act"
+        name="Books Categ"
+        res_model="library.book.category"
+        view_mode="tree,form"
+        target="new" />
 </odoo>

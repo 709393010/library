@@ -30,6 +30,7 @@
                         <field name="member_image" widget="image" class="oe_avatar"/>
                         <field name="member_id" />
                         <field name="request_date" />
+                        <field name="checkout_date" />
                         <field name="user_id" />
                         <field name="line_ids" />
                         <field name="stage_id" />
