@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- 修改组名 -->
+    <record id="library_app.library_group_user" model="res.groups">
+        <field name="name">Libraian</field>
+    </record>
+</odoo>

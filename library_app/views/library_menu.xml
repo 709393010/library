@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+	<!-- Library App Menu -->
+	<record id="action_library_book" model="ir.actions.act_window">
+        <field name="name">Library Book</field>
+        <field name="res_model">library.book</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Library" 
+        action="action_library_book" 
+        id="menu_library" 
+    />
+
+     <!-- Action to open the Book list -->
+     <act_window id="action_library_book"
+        name="Library Books"
+        res_model="library.book"
+        view_mode="tree,form"
+    />
+    <!-- Menu item to open the Book list -->
+    <menuitem id="menu_library_book"
+        name="Books"
+        parent="menu_library"
+        action="action_library_book"
+    />
+    <!-- report的菜单项 -->
+    <act_window id="myself_action_library_book_sql_report"
+        name="Book Report"
+        res_model="library.book.report"
+        view_mode="tree,form"
+    />
+    <menuitem id="menu_library_book_report"
+        name="Book Report"
+        parent="menu_library"
+        action="myself_action_library_book_sql_report"
+    />
+  
+</odoo>
