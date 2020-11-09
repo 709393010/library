@@ -43,4 +43,5 @@
         res_model="library.book.category"
         view_mode="tree,form"
         target="new" />
+
 </odoo>

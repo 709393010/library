@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<odoo>
+<odoo noupdate="0">
     <record id="view_form_book" model="ir.ui.view">
         <field name="name">Book Form</field>
         <field name="model">library.book</field>
@@ -8,6 +8,9 @@
                 <header>
                     <!-- 此处添加按钮 -->
                     <button string="Check ISBN" name="button_check_isbn" type="object" class="oe_highlight"/>
+                    <button string="Update Date" name="change_update_date" type="object" class="oe_highlight"/>
+                    <button string="Avg Cost price" name="get_average_cost" type="object" class="oe_highlight"/>
+                    <button string="Search Library Member" name="get_all_library_member" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group name="group_top">
@@ -15,12 +18,17 @@
                             <field name="name" />
                             <field name="author_ids" widget="many2many_tags" />
                             <field name="publisher_id" />
+                            <field name="publisher_city" />
                             <field name="date_published" />
                             <field name="category_id" />
+                            <field name="ref_doc_id" />
+                            <field name="cost_price" />
                         </group>
                         <group name="group_right">
                              <field name="isbn" />
                             <field name="active" />
+                            <field name="age_days" />
+                            <field name="date_updated" />
                             <field name="image" widget="image" />
                         </group>
                     </group>
@@ -33,11 +41,14 @@
         <field name="Bookname">Book List</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
-            <tree default_order="date_published asc">
+            <tree default_order="name asc" >
                 <field name="name" />
                 <field name="author_ids" widget="many2many_tags" />
                 <field name="publisher_id" />
                 <field name="date_published" />
+                <field name="cost_price" />
+                <field name="age_days" />
+                <field name="date_updated" />
             </tree>
         </field>
     </record>
@@ -69,6 +80,10 @@
         <field name="model">library.book.category</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                    
+                </header>
+
                 <sheet>
                     <group>
                         <field name="name" />
@@ -78,5 +93,8 @@
             </form>
         </field>
     </record>
-    
+
+    <!-- 增加图书价格 -->
+    <!-- <function model="library.book" name="update_book_price" eval="[10]"/> -->
+
 </odoo>

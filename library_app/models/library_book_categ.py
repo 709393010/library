@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 class BookCategory(models.Model):
     _name = 'library.book.category'
     name = fields.Char('Category')
-
+    _description = 'Book Category'
     _parent_store = True
     _parent_name = "parent_id" # optional if field is 'parent_id'
     parent_path = fields.Char(index=True)
@@ -22,3 +22,4 @@ class BookCategory(models.Model):
     def _check_hierarchy(self):
         if not self._check_recursion():
             raise models.ValidationError('Error! You cannot create recursive categories.')
+    
