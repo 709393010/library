@@ -11,6 +11,7 @@
                     <button string="Update Date" name="change_update_date" type="object" class="oe_highlight"/>
                     <button string="Avg Cost price" name="get_average_cost" type="object" class="oe_highlight"/>
                     <button string="Search Library Member" name="get_all_library_member" type="object" class="oe_highlight"/>
+                    <button string="Rent this book" name="book_rent" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group name="group_top">
@@ -38,7 +39,7 @@
     </record>
     <!-- tree视图 -->
     <record id="view_tree_book" model="ir.ui.view">
-        <field name="Bookname">Book List</field>
+        <field name="name">Book List</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
             <tree default_order="name asc" >

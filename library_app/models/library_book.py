@@ -49,6 +49,27 @@ class Book(models.Model):
         string='Reference Document')
 
 
+    #模拟丢失图书，并不改变图书真正的状态
+    def make_lost(self):
+        self.ensure_one()
+        self.state = 'lost'
+        if not self.env.context.get('avoid_deactivate'):
+            self.active = False 
+
+    #更改执⾏动作的⽤户,让普通用户可以借书
+    def book_rent(self):
+        self.ensure_one()
+
+        # if self.state != 'available' :
+        #     raise UserError(_('Book is not available for renting'))
+
+        #使⽤超级⽤户来获取library.book.rent的空记录集
+        rent_as_superuser = self.env['library.book.rent'].sudo()
+        rent_as_superuser.create({
+            'book_id' : self.id,
+            'borrower_id' : self.env.user.partner_id.id,
+        })
+
     #更新模块时，自动增加图书的价格
     @api.model
     def update_book_price(self,increase):
@@ -58,6 +79,8 @@ class Book(models.Model):
 
     #获取数据，计算每个分类的平均成本
     def get_average_cost(self): #button触发,在终端查看
+        # import pdb  #加断点
+        # pdb.set_trace()
         vals = self._get_average_cost()
         print(vals)
         return vals

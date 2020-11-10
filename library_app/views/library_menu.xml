@@ -25,6 +25,12 @@
         parent="menu_library"
         action="action_library_book"
     />
+    <!-- 在Books下面加一个Books List -->
+    <menuitem id="menu_library_book_list"
+        name="Books List"
+        parent="menu_library_book"
+        action="action_library_book"
+        sequence="10"/>
     <!-- report的菜单项 -->
     <act_window id="myself_action_library_book_sql_report"
         name="Book Report"
@@ -33,9 +39,9 @@
     />
     <menuitem id="menu_library_book_report"
         name="Book Report"
-        parent="menu_library"
+        parent="menu_library_book"
         action="myself_action_library_book_sql_report"
-    />
+        sequence="30"/>
     
     <!-- library book categ act_window -->
     <act_window id="library_book_categ_act"
@@ -43,5 +49,17 @@
         res_model="library.book.category"
         view_mode="tree,form"
         target="new" />
+    <!-- library book rent act_window -->
+    <act_window id="action_library_book_rent"
+        name="Book Rent"
+        res_model="library.book.rent"
+        view_mode="tree,form"
+    />
+    <!-- Menu item to open the Book rent -->
+    <menuitem id="menu_library_book_rent"
+        name="Book Rent"
+        parent="menu_library"
+        action="action_library_book_rent"
+    />
 
 </odoo>

@@ -1,0 +1,40 @@
+
+<odoo>
+
+    <record id="book_rent_view_form" model="ir.ui.view">
+        <field name="name">Libary Book Rent</field>
+        <field name="model">library.book.rent</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                   <button string="Lost the Book" name="book_lost" states="ongoing" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="book_id" />
+                        <field name="borrower_id" />
+                        <field name="state" />
+                        <field name="rent_date" />
+                        <field name="return_date" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <!-- tree视图 -->
+    <record id="view_tree_book_rent" model="ir.ui.view">
+        <field name="name">Book Rent</field>
+        <field name="model">library.book.rent</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="book_id" />
+                <field name="borrower_id" />
+                <field name="state" />
+                <field name="rent_date" />
+                <field name="return_date" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>
