@@ -15,20 +15,20 @@
         <field name='name'>library return wizard form view</field>
         <field name='model'>library.return.wizard</field>
         <field name='arch' type='xml'>
-        <form>
-            <sheet>
-                <group>
-                    <field name='borrower_id'/>
-                </group>
-                <group>
-                    <field name='book_ids'/>
-                </group>
-            </sheet>
-            <footer>
-                <button string='Return' type='object' name='books_returns' class='btn-primary'/>
-                <button string='Cancel' class='btn-default' special='cancel'/>
-            </footer>
-        </form>
+            <form>
+                <sheet>
+                    <group>
+                        <field name='borrower_id'/>
+                    </group>
+                    <group>
+                        <field name='book_ids'/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string='Return' type='object' name='return_books' class='btn-primary'/>
+                    <button string='Cancel' class='btn-default' special='cancel'/>
+                </footer>
+            </form>
         </field>
     </record>
 

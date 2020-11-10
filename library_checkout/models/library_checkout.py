@@ -99,6 +99,7 @@ class Checkout(models.Model):
 
 class CheckoutLine(models.Model):
     _name = 'library.checkout.line'
+    _rec_name = 'book_id'
     _description = 'Borrow Request Line'
     checkout_id = fields.Many2one('library.checkout')
     book_id = fields.Many2one('library.book')

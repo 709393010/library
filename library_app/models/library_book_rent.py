@@ -2,6 +2,7 @@ from odoo import fields,models
 
 class LibrayBookRent(models.Model):
     _name = 'library.book.rent'
+    #_rec_name = 'borrower_id'  #字段用于标记记录 borrower_id
     _description = 'Book Rent'
     book_id = fields.Many2one('library.book','Book',required=True)
     borrower_id = fields.Many2one('res.partner', 'Borrower',required=True)
