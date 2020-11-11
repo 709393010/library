@@ -4,7 +4,7 @@
       		<field name="name">Library</field>
 	</record>
 	 <!-- Library User Group -->
-	    <record id="library_group_user" model="res.groups">
+	<record id="library_group_user" model="res.groups">
 	            <field name="name">User</field>
 	            <field name="category_id" ref="module_library_category" />
 	            <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />

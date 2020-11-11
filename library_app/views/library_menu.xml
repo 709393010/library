@@ -11,10 +11,11 @@
     <menuitem name="Library" 
         action="action_library_book" 
         id="menu_library" 
+        web_icon = "library_app,static/description/webicon.png"
     />
 
      <!-- Action to open the Book list -->
-     <act_window id="action_library_book"
+    <act_window id="action_library_book"
         name="Library Books"
         res_model="library.book"
         view_mode="tree,form"
