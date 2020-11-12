@@ -15,5 +15,7 @@
             'reports/library_book_sql_report.xml',
             'LibraryRentWizard/rent_wizard_view.xml',
             'LibraryRentWizard/return_wizard_view.xml',
+            'data/data.xml',
+            'data/demo.xml',
             ],
 }

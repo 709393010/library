@@ -3,3 +3,5 @@ access_library_rule,library_book_users,model_library_book,base.group_user,1,1,1,
 access_library_book_report,access_library_book_report,model_library_book_report,library_group_user,1,0,0,0
 library_book_rent_user,Book Rent User,model_library_book_rent,library_group_user,1,0,0,0
 library_book_rent_manager,Book Rent Manager,model_library_book_rent,library_group_manager,1,1,1,1
+library_book_category_user,Book Category User,model_library_book_category,library_group_user,1,0,0,0
+library_book_rent_manager,Book Category Manager,model_library_book_category,library_group_manager,1,1,1,1

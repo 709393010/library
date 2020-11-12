@@ -1,0 +1,23 @@
+
+<odoo noupdate="1">
+
+    <record id="add_author" model="res.partner">
+        <field name="name">Jack</field>
+    </record>
+
+    <record id="add_publisher" model="res.partner">
+        <field name="name">Google</field>
+    </record>
+
+    <record id="add_library_book_data_test" model="library.book">
+        <field name="name">暮光之城</field>
+        <!-- eval用于One2many和Many2many -->
+        <field name="author_ids" eval="[(6,0,[ref('add_author')])]"
+            />
+        <!-- #ref用于Many2one字段     -->
+        <field name="publisher_id" ref="add_publisher" /> 
+        <field name="date_published">2000-12-21</field>
+        <field name="cost_price">100</field>
+    </record>
+
+</odoo>

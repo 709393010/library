@@ -4,6 +4,14 @@ from odoo.exceptions import Warning
 from odoo.exceptions import ValidationError
 from datetime import timedelta
 
+# Odoo保留字段
+# name(Char) -- _rec_name的默认值，在需要用来展示的时候使用
+# active(Boolean) -- 设置记录的全局可见性，当值为False时通过search和list是获取不到的
+# sequence(Integer) -- 可修改的排序，可以在列表视图里通过拖拽进行排序
+# state(Selection) -- 对象的生命周期阶段，通过fileds的states属性使用
+# parent_id(Many2one) -- 用来对树形结构的记录排序，并激活domain表达式的child_of运算符
+# parent_left,parent_right -- 与 _parent_store结合使用，提供更好的树形结构数据读取
+
 class Book(models.Model):
     _name = 'library.book'
     _description = 'Book'
@@ -29,9 +37,10 @@ class Book(models.Model):
         default=lambda self: fields.Datetime.now())
     ###
     active = fields.Boolean('Active?', default=True)
-    date_published = fields.Date('Publiced Date')
+    date_published = fields.Date('Published Date')
     image = fields.Binary('Cover')
     publisher_id = fields.Many2one('res.partner', string='Publisher')
+    #related 引用类型，由当前模型的某个关联字段的某个字段带出值
     publisher_city = fields.Char('Publisher City',related='publisher_id.city',readonly=True)
     author_ids = fields.Many2many('res.partner', string='Authors')
     category_id = fields.Many2one('library.book.category')
@@ -44,6 +53,7 @@ class Book(models.Model):
          search='_search_age',
          store=False, # optional
          compute_sudo=False )
+    #reference是比related更高级的引用字段，可以指定该字段引用那些模型范围内的模型的哪些字段的值，范围更广
     ref_doc_id = fields.Reference(
         selection='_referencable_models',
         string='Reference Document')
