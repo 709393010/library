@@ -12,6 +12,7 @@
                     <button string="Avg Cost price" name="get_average_cost" type="object" class="oe_highlight"/>
                     <button string="Search Library Member" name="get_all_library_member" type="object" class="oe_highlight"/>
                     <button string="Rent this book" name="book_rent" type="object" class="oe_highlight"/>
+                    <button string="Change Currency" name="change_currency_id" type="object" class="oe_highlight" />
                 </header>
                 <sheet>
                     <group name="group_top">
@@ -23,14 +24,16 @@
                             <field name="date_published" />
                             <field name="category_id" />
                             <field name="ref_doc_id" />
+                            <field name="currency_id" />
                             <field name="cost_price" />
+                            <field name="ref_doc_id" />
                         </group>
                         <group name="group_right">
                              <field name="isbn" />
                             <field name="active" />
                             <field name="age_days" />
                             <field name="date_updated" />
-                            <field name="image" widget="image" />
+                            <field name="image" widget="image" />  
                         </group>
                     </group>
                 </sheet>
@@ -42,11 +45,13 @@
         <field name="name">Book List</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
-            <tree default_order="name asc" >
+            <tree default_order="id" >
+                <field name="id" />
                 <field name="name" />
                 <field name="author_ids" widget="many2many_tags" />
                 <field name="publisher_id" />
                 <field name="date_published" />
+                <field name="currency_id" invisible='1'/>
                 <field name="cost_price" />
                 <field name="age_days" />
                 <field name="date_updated" />

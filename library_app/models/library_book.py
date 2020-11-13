@@ -16,9 +16,14 @@ class Book(models.Model):
     _name = 'library.book'
     _description = 'Book'
     _order= 'name, date_published asc'
+    _sql_constraints =[ #数据库约束，保证name唯一
+        ('name_uniq',
+        'UNIQUE(name)',
+        'Book title must be unique.')
+    ]
+    
     name = fields.Char('Title', required=True)
     isbn = fields.Char('ISBN')
-    ###
     book_type = fields.Selection(
         [('paper', 'Paperback'),
         ('hard', 'Hardcover'),
@@ -45,7 +50,14 @@ class Book(models.Model):
     author_ids = fields.Many2many('res.partner', string='Authors')
     category_id = fields.Many2one('library.book.category')
     date_updated = fields.Datetime('Date Update Time')
-    cost_price = fields.Float('Book Cost')
+    
+    #查找res.currency的id
+    def default_currency_id(self):
+        return self.env['res.currency'].search([])[0].id
+    #添加货币字段
+    currency_id = fields.Many2one('res.currency',string='Currency',
+        default=default_currency_id)
+    cost_price = fields.Monetary('Book Cost') #Monetary存储某个币种的数量值
     age_days = fields.Float(
          string='Days Since Publish',
          compute='_compute_age',
@@ -57,7 +69,11 @@ class Book(models.Model):
     ref_doc_id = fields.Reference(
         selection='_referencable_models',
         string='Reference Document')
+    html_description = fields.Html()
 
+    #修改货币类型
+    def	change_currency_id(self):
+        self.currency_id = self.env['res.currency'].search([])[0].id
 
     #模拟丢失图书，并不改变图书真正的状态
     def make_lost(self):
@@ -65,6 +81,8 @@ class Book(models.Model):
         self.state = 'lost'
         if not self.env.context.get('avoid_deactivate'):
             self.active = False 
+    
+   
 
     #更改执⾏动作的⽤户,让普通用户可以借书
     def book_rent(self):

@@ -1,17 +1,18 @@
 from odoo import models,fields,api
+from odoo.exceptions import Warning
 
 class LibraryReturnsWizard(models.TransientModel):
     _name = 'library.return.wizard'
 
-    borrower_id = fields.Many2one('res.partner',string='Member')
-    book_ids = fields.Many2many('library.book',string='Books')
-    # name = fields.Char(related="borrower_id.borrower_id.name")
+    borrower_id = fields.Many2one('library.member',string='Member') 
+    book_ids = fields.Many2many('library.book',string='Books') 
 
-    # @api.onchange('borrower_id')
-    # def _compute_res_partner(self):
-    #     for record in self:
-    #         print(record.borrower_id.book_id.name)
-    #         record.name = record.borrower_id.book_id.name    
+
+    #如果book_ids为空，则弹出提示
+    @api.constrains('book_ids')
+    def judge_rent_book_null(self):
+        if not self.book_ids :
+            raise models.ValidationError('Return book is Null !')
 
     #自动填充book_ids
     @api.onchange('borrower_id')
@@ -19,8 +20,9 @@ class LibraryReturnsWizard(models.TransientModel):
         rentModel = self.env['library.book.rent']
         books_on_rent = rentModel.search(
             [('state','=','ongoing'),
-            ('borrower_id','=',self.borrower_id.id)])
+            ('borrower_id.name','=',self.borrower_id.name)]) #判断借阅列表的name = 会员列表的name
         self.book_ids = books_on_rent.mapped('book_id')
+        
 
     #修改state为returned
     @api.multi
@@ -28,7 +30,7 @@ class LibraryReturnsWizard(models.TransientModel):
         returnModel = self.env['library.book.rent']
         books_on_return = returnModel.search(
             [('state','=','ongoing'),
-            ('borrower_id','=',self.borrower_id.id)]
+            ('borrower_id.name','=',self.borrower_id.name)]
         )
         books_on_return.write({'state' : 'returned'})
         #修改后跳转到Book Rent view

@@ -11,6 +11,7 @@
             'views/book_view.xml',
             'views/book_list_template.xml',
             'views/book_rent_view.xml',
+            'views/book_details.xml',
             'reports/library_book_report.xml',
             'reports/library_book_sql_report.xml',
             'LibraryRentWizard/rent_wizard_view.xml',

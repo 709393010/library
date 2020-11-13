@@ -3,7 +3,7 @@ from odoo import models,fields
 class LibraryRentWizard(models.TransientModel):
     _name = 'library.rent.wizard'
     _description = 'Book Rent Wizard'
-    borrower_id = fields.Many2one('res.partner',string='Borrower')
+    borrower_id = fields.Many2one('library.member',string='Borrower')
     book_ids = fields.Many2one('library.book',string='Books')
 
     #添加在临时模型上执行动作的回调方法

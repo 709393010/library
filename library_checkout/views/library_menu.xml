@@ -2,7 +2,7 @@
     <act_window id="action_library_checkout"
         name="Checkouts"
         res_model="library.checkout"
-        view_mode="kanban,tree,form,activity,graph,pivot,calendar" />
+        view_mode="tree,form,kanban,activity,graph,pivot,calendar" />
     <menuitem id="menu_library_checkout"
         name="Checkout"
         action="action_library_checkout"

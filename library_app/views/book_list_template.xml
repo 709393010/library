@@ -13,4 +13,36 @@
             </t>
         </div>
     </template>
+
+    <!-- 为图书详情添加⼀个新模板 -->
+    <template id="book_details" name="Books Detail">
+        <t t-call="website.layout">
+        <div class="container">
+            <div class="row mt16">
+            <div class="col-5">
+                <span t-field="book.image" t-options="{
+                'widget': 'image',
+                'class': 'mx-auto d-block imgthumbnail'}"/>
+            </div>
+            <div class="offset-1 col-6">
+                <h1 t-field="book.name"/>
+                <t t-if="book.date_published">
+                <div t-field="book.date_published" class="text-muted"/>
+                </t>
+                <b class="mt8"> Authors </b>
+                <ul>
+                <li t-foreach="book.author_ids" tas="author">
+                    <span t-esc="author.name" />
+                </li>
+                </ul>
+                <a t-attf-href="/books/#{book.id}" class="btn btnprimary btn-sm">
+                    <i class="fa fa-book"/> Book Detail
+                </a>
+            </div>
+            </div>
+        </div>
+        <div t-field="book.html_description"/>
+        </t>
+    </template>
+
 </odoo>
