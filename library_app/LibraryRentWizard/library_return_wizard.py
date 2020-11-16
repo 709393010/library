@@ -3,6 +3,7 @@ from odoo.exceptions import Warning
 
 class LibraryReturnsWizard(models.TransientModel):
     _name = 'library.return.wizard'
+    _description = 'Book Return Wizard'
 
     borrower_id = fields.Many2one('library.member',string='Member') 
     book_ids = fields.Many2many('library.book',string='Books') 

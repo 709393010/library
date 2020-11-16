@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 
 class CheckoutStage(models.Model):
     _name = 'library.checkout.stage'
+    #_rec_name = 'state'
     _description = 'Checkout Stage'
     _order = 'sequence,name'
 
@@ -18,6 +19,7 @@ class CheckoutStage(models.Model):
         ('cancel','Cancelled')],
         default='new',
     )
+
     #添加⼀个帮助⽅法来查看是否允许状态转换
     @api.model
     def is_allowed_transition(self,old_state,new_state):

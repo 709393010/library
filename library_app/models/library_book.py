@@ -50,7 +50,17 @@ class Book(models.Model):
     author_ids = fields.Many2many('res.partner', string='Authors')
     category_id = fields.Many2one('library.book.category')
     date_updated = fields.Datetime('Date Update Time')
-    
+    state = fields.Selection(
+        [('draft', 'Not Available'),
+        ('available', 'Available'),
+        ('lost', 'Lost')],
+        'State', default="draft")
+
+    def make_available(self):
+        self.write({'state': 'available'})
+    def make_lost(self):
+        self.write({'state': 'lost'})
+
     #查找res.currency的id
     def default_currency_id(self):
         return self.env['res.currency'].search([])[0].id

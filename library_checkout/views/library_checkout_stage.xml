@@ -16,7 +16,7 @@
         <field name="state">done</field>
     </record>
     <record id="stage_95" model="library.checkout.stage">
-        <field name="name">Cacelled</field>
+        <field name="name">Cancelled</field>
         <field name="sequence">95</field>
         <field name="state">cancel</field>
     </record>

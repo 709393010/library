@@ -6,9 +6,10 @@
         <field name="arch" type="xml">
             <tree decoration-muted="state in ['done', 'cancel']" decoration-bf="state=='open'">
                 <field name="state" invisible="True" />
-                <field name="request_date" />
                 <field name="member_id" />
+                <field name="request_date" />
                 <field name="checkout_date" />
+                <field name="user_id" />
                 <field name="stage_id" />
                 <field name="num_books" sum="# Books" />
             </tree>
@@ -21,8 +22,11 @@
             <form>
                 <!-- header状态栏 -->
                 <header>
-                    <!--以下仅供查看效果使⽤-->
-                    <field name="state" widget="statusbar" clickable="True" statusbar_visible="draft,open,done"/>     
+                    <!--显示state-->
+                    <field name="state" widget="statusbar" clickable="True" statusbar_visible="new,open,done,cancel"/>     
+                   
+                    <button name="button_to_borrowed" string="To Borrowed" type="object"  class="oe_highlight" />
+                    <button name="button_to_returned" string="To Returned" type="object"  class="oe_highlight" />
                 </header>
 
                 <sheet>

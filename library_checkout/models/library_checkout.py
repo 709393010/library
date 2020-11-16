@@ -16,6 +16,7 @@ class Checkout(models.Model):
         'library.checkout.line',
         'checkout_id',
         string='Borrowed Books',)
+    stage_id = fields.Many2one('library.checkout.stage' , string='Stage')
     checkout_date = fields.Date(default=lambda s: fields.Date.today(),readonly=True)
     close_date = fields.Date(readonly=True)
     member_image = fields.Binary(related='member_id.partner_id.image')
@@ -34,6 +35,26 @@ class Checkout(models.Model):
         ('done', 'Ready for next stage')],
         'Kanban State',
         default='normal')
+
+    #如果stage_id=Cacelled时，清空Borrowed Books
+    @api.onchange('stage_id')
+    def stage_to_cacelled(self):
+        if self.stage_id.name == 'Cancelled':
+            self.line_ids = [(5,0,0)] #(5,0,0)清空记录集
+
+    #更改Stage为Borrowed
+    @api.multi
+    def button_to_borrowed(self):
+        StageModel = self.env['library.checkout.stage']
+        print(StageModel.search([])[1].state)
+        self.stage_id.name = StageModel.search([])[1].name
+        self.stage_id.state = StageModel.search([])[1].state
+
+    #更改Stage为Returned
+    def button_to_returned(self):
+        self.stage_id.name = self.env['library.checkout.stage'].search([])[2].name
+        self.stage_id.state = self.env['library.checkout.stage'].search([])[2].state
+
 
     @api.depends('line_ids')
     def _compute_num_books(self):
@@ -101,5 +122,6 @@ class CheckoutLine(models.Model):
     _name = 'library.checkout.line'
     _rec_name = 'book_id'
     _description = 'Borrow Request Line'
-    checkout_id = fields.Many2one('library.checkout')
     book_id = fields.Many2one('library.book')
+    checkout_id = fields.Many2one('library.checkout')
+    
