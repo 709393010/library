@@ -56,10 +56,13 @@ class Book(models.Model):
         ('lost', 'Lost')],
         'State', default="draft")
 
+        
+    @api.multi
     def make_available(self):
-        self.write({'state': 'available'})
-    def make_lost(self):
-        self.write({'state': 'lost'})
+        self.write({'state' : 'available'})
+        return True
+    # def make_lost(self):
+    #     self.write({'state': 'lost'})
 
     #查找res.currency的id
     def default_currency_id(self):

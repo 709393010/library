@@ -6,6 +6,8 @@
         <field name="res_model">library.book</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
+        <!-- 显示active=False的数据 -->
+        <!-- <field name="context">{'active_test:False'}</field> -->
     </record>
 
     <menuitem name="Library" 

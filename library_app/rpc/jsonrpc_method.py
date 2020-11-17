@@ -1,0 +1,39 @@
+
+import json
+import random
+import requests
+
+server_url = 'http://localhost:8888'
+db_name = 'odoo12'
+username = 'root'
+password = '123456'
+
+json_endpoint = "%s/jsonrpc" % server_url
+headers = {"Content-Type" : "application/json"}
+
+def get_json_payload(service,method,*args):
+    return json.dumps({
+        "jsonrpc" : "2.0",
+        "method" : "call",
+        "params" : {
+            "service" : service,
+            "method" : method,
+            "args" : args
+        },
+        "id" : random.randint(0,10000000),
+    }) 
+
+payload = get_json_payload("common","login",db_name, username, password)
+response = requests.post(json_endpoint, data=payload, headers=headers)
+user_id = response.json()['result']
+
+if user_id:
+    payload = get_json_payload("object","execute_kw",db_name,user_id,password,'library.book','make_available',[[82]])
+    res = requests.post(json_endpoint, data=payload, headers=headers).json()
+
+    payload = get_json_payload("object","execute_kw",db_name,user_id,password,'library.book','read',[[82],['name','state']])
+    res = requests.post(json_endpoint,data=payload, headers=headers).json()
+    print("Book state after the method call:",res['result'])
+
+else:
+    print("Failed: wrong credentials")

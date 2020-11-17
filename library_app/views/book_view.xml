@@ -29,7 +29,8 @@
                             <field name="ref_doc_id" />
                         </group>
                         <group name="group_right">
-                             <field name="isbn" />
+                            <field name="isbn" />
+                            <field name="state" />
                             <field name="active" />
                             <field name="age_days" />
                             <field name="date_updated" />
@@ -55,6 +56,7 @@
                 <field name="cost_price" />
                 <field name="age_days" />
                 <field name="date_updated" />
+                <field name="state" />
             </tree>
         </field>
     </record>
