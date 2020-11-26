@@ -22,6 +22,7 @@ class Books(http.Controller):
         html_result += '</ul></body></html>'
         return html_result
 
+    #http://localhost:8069/library/book_details?book_id=1
     #通过book_id查书    
     @http.route('/library/book_details', type='http',auth="none")
     def book_details(self,book_id):
@@ -30,9 +31,9 @@ class Books(http.Controller):
             ','.join(record.author_ids.mapped('name')) or 'none')
 
     #添加⼀个我们可以传递图书ID的路径
-    # @http.route("/library/book_details/<model('library.book'):book>",type='http',auth='none')
-    # def book_details_in_path(self,book):
-    #     return self.book_details(book.id)
+    @http.route("/library/book_details/<model('library.book'):book>",type='http',auth='user')
+    def book_details_in_path(self,book):
+        return self.book_details(book.id)
 
 
     #图书详情页
